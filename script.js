@@ -24,17 +24,17 @@ $(document).ready(function () {
             student += '<td>' + 
                 value.Phone + '</td>';
 
-            student += '<td>' + 
-                value.WhatsApp + '</td>';
+            // student += '<td>' + 
+            //     value.WhatsApp + '</td>';
 
-            student += '<td>' + 
-                value.Viber + '</td>';
+            // student += '<td>' + 
+            //     value.Viber + '</td>';
 
             student += '<td>' + 
                 value.MoH + '</td>';
 
-            student += '<td>' + 
-                value.FIELD8 + '</td>';
+            // student += '<td>' + 
+            //     value.FIELD8 + '</td>';
 
 
             student += '</tr>';
