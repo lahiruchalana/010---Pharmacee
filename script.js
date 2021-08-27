@@ -1,55 +1,161 @@
 
-$(document).ready(function () {
-  
-    // FETCHING DATA FROM JSON FILE
-    $.getJSON("data.json", 
-            function (data) {
-        var student = '';
 
-        // ITERATING THROUGH OBJECTS
-        $.each(data, function (key, value) {
+var json = [];
+$.getJSON("data.json", function (data) {
+    var pharmacy = [];
+    $.each(data, function (key, value) {
+        pharmacy += '<tr>';
+        pharmacy += '<td>' + 
+            value.District + '</td>';
 
-            //CONSTRUCTION OF ROWS HAVING
-            // DATA FROM JSON OBJECT
-            student += '<tr>';
-            student += '<td>' + 
-                value.District + '</td>';
+            pharmacy += '<td>' + 
+            value.Name + '</td>';
 
-            student += '<td>' + 
-                value.Name + '</td>';
+            pharmacy += '<td>' + 
+            value.Address + '</td>';
 
-            student += '<td>' + 
-                value.Address + '</td>';
+            pharmacy += '<td>' + 
+            value.Phone + '</td>';
 
-            student += '<td>' + 
-                value.Phone + '</td>';
+            pharmacy += '<td>' + 
+            value.MoH + '</td>';
 
-            // student += '<td>' + 
-            //     value.WhatsApp + '</td>';
-
-            // student += '<td>' + 
-            //     value.Viber + '</td>';
-
-            student += '<td>' + 
-                value.MoH + '</td>';
-
-            // student += '<td>' + 
-            //     value.FIELD8 + '</td>';
-
-
-            student += '</tr>';
-        });
-          
-        //INSERTING ROWS INTO TABLE 
-        $('#table').append(student);
-    });
+        pharmacy += '</tr>';
+    })
+    json = data;
+    $('#table tbody').append(pharmacy);
 });
 
 
+function filteredTable() {
+    var results = [];
+    var District = "District";
+    var Name = "Name";
+    var Address = "Address";
+    var MOH = "MoH";
+    var searchVal = document.getElementById('search').value.toLowerCase();
+    $('#table tbody').html('');
+    for (var i=0 ; i < json.length ; i++)
+    {
+        if ((json[i][District].toLowerCase()).includes(searchVal)) {
+            filterData()
+        } else if ((json[i][Name].toLowerCase()).includes(searchVal)) {
+            filterData()
+        } else if ((json[i][Address].toLowerCase()).includes(searchVal)) {
+            filterData()
+        } else if ((json[i][MOH].toLowerCase()).includes(searchVal)) {
+            filterData()
+        }
+        function filterData() {
+            var newroutes_data = '';
+            newroutes_data += '<tr>';
+            newroutes_data += '<td>' + json[i].District + '</td>';
+            newroutes_data += '<td>' + json[i].Name + '</td>';
+            newroutes_data += '<td>' + json[i].Address + '</td>';
+            newroutes_data += '<td>' + json[i].Phone + '</td>';
+            newroutes_data += '<td>' + json[i].MoH + '</td>';
+            newroutes_data += '</tr>';
 
-// // jQuery
-// $.getData('/path/to/imported/data.js', function()
-// {
-//     pharmacyData.DataTable();
+            results.push(newroutes_data);
+            $('#table tbody').append(newroutes_data);
+        }
+    }
+}
+
+
+
+// var json = [];
+// $.getJSON("data.json", function (data) {
+//     var pharmacy = [];
+//     $.each(data, function (key, value) {
+//         pharmacy += '<tr>';
+//         pharmacy += '<td>' + 
+//             value.District + '</td>';
+
+//             pharmacy += '<td>' + 
+//             value.Name + '</td>';
+
+//             pharmacy += '<td>' + 
+//             value.Address + '</td>';
+
+//             pharmacy += '<td>' + 
+//             value.Phone + '</td>';
+
+//             pharmacy += '<td>' + 
+//             value.MoH + '</td>';
+
+//         pharmacy += '</tr>';
+//     })
+//     json = data;
+//     $('#table tbody').append(pharmacy);
 // });
 
+// $('#search').on('keyup', function(){
+//     var searchVal = $(this).val()
+//     console.log("Value:", searchVal)
+//     searchDistricts(searchVal)
+// })
+
+// function searchDistricts(searchVal) {
+//     var results = [];
+//     var searchField = "District";
+//     // var searchVal = document.getElementById('#search').val();
+//     // console.log(searchVal)
+//     $('#table tbody').html('');
+//     for (var i=0 ; i < json.length ; i++)
+//     {
+//         if (json[i][searchField].toLowerCase() == searchVal) {
+
+//             var newPharmacy = '';
+//             newPharmacy += '<tr>';
+//             newPharmacy += '<td>' + json[i].District + '</td>';
+//             newPharmacy += '<td>' + json[i].Name + '</td>';
+//             newPharmacy += '<td>' + json[i].Address + '</td>';
+//             newPharmacy += '<td>' + json[i].Phone + '</td>';
+//             newPharmacy += '<td>' + json[i].MoH + '</td>';
+//             newPharmacy += '</tr>';
+
+            
+//             results.push(newPharmacy);
+//             $('#table').append(newPharmacy);
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+
+// $(document).ready(function () {
+  
+//     $.getJSON("data.json", 
+//             function (data) {
+//         var pharmacy = '';
+
+//         $.each(data, function (key, value) {
+
+//             pharmacy += '<tr>';
+//             pharmacy += '<td>' + 
+//                 value.District + '</td>';
+
+//                 pharmacy += '<td>' + 
+//                 value.Name + '</td>';
+
+//                 pharmacy += '<td>' + 
+//                 value.Address + '</td>';
+
+//                 pharmacy += '<td>' + 
+//                 value.Phone + '</td>';
+
+//                 pharmacy += '<td>' + 
+//                 value.MoH + '</td>';
+
+//             pharmacy += '</tr>';
+//         });
+
+//         $('#table').append(pharmacy);
+//     });
+// });
