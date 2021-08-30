@@ -1,5 +1,3 @@
-
-
 var json = [];
 $.getJSON("data.json", function (data) {
     var pharmacy = [];
@@ -32,7 +30,6 @@ $('#districtButtons button').click(function(event) {
     console.log(districtVal)
     filteredTableByDisctrict(districtVal)
 });
-
 
 
 function filteredTableByDisctrict(districtVal) {
