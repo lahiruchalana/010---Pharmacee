@@ -16,6 +16,12 @@ $.getJSON("data.json", function (data) {
             value.Phone + '</td>';
 
             pharmacy += '<td>' + 
+            value.WhatsApp + '</td>';
+
+            pharmacy += '<td>' + 
+            value.Viber + '</td>';
+
+            pharmacy += '<td>' + 
             value.MoH + '</td>';
 
         pharmacy += '</tr>';
@@ -48,6 +54,8 @@ function filteredTableByDisctrict(districtVal) {
             district_data += '<td>' + json[i].Name + '</td>';
             district_data += '<td>' + json[i].Address + '</td>';
             district_data += '<td>' + json[i].Phone + '</td>';
+            district_data += '<td>' + json[i].WhatsApp + '</td>';
+            district_data += '<td>' + json[i].Viber + '</td>';
             district_data += '<td>' + json[i].MoH + '</td>';
             district_data += '</tr>';
 
@@ -84,6 +92,8 @@ function filteredTable() {
             newroutes_data += '<td>' + json[i].Name + '</td>';
             newroutes_data += '<td>' + json[i].Address + '</td>';
             newroutes_data += '<td>' + json[i].Phone + '</td>';
+            newroutes_data += '<td>' + json[i].WhatsApp + '</td>';
+            newroutes_data += '<td>' + json[i].Viber + '</td>';
             newroutes_data += '<td>' + json[i].MoH + '</td>';
             newroutes_data += '</tr>';
 
