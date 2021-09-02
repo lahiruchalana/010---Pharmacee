@@ -46,6 +46,26 @@
 
             var map = new
             google.maps.Map(document.getElementById('map'), options)
+
+            $.getJSON("data.json", function (data) {
+                $.each(data, function (key, value) {
+                    var latitude = parseFloat(value.Latitude)
+                    var longitude = parseFloat(value.Longitude)
+                    var coords = {lat:latitude,lng:longitude}
+                    var name = value.Name
+                    console.log(latitude, longitude, name, coords)
+                    addMarker(coords, name)
+                });
+
+                function addMarker(coords, name) {
+                    var marker = new google.maps.Marker({
+                        position:coords,
+                        map:map,
+                        icon:'/images/cross.png'
+                    })
+                }
+            });
+
         }
     </script>
     <script async
