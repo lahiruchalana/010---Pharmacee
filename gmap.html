@@ -53,15 +53,33 @@
                     var longitude = parseFloat(value.Longitude)
                     var coords = {lat:latitude,lng:longitude}
                     var name = value.Name
-                    console.log(latitude, longitude, name, coords)
-                    addMarker(coords, name)
+                    var address = value.Address
+                    var phone = value.Phone
+                    var whatsApp = value.WhatsApp
+                    var viber = value.Viber
+                    var info = `<h4>${name}</h4>` 
+                    + `<h6>${address}</h6>` 
+                    + `<h6>Phone : ${phone}</h6>`
+                    + `<h6>WhatsApp : ${whatsApp}</h6>` 
+                    + `<h6>Viber : ${viber}</h6>`
+                    addMarker(coords, info)
                 });
 
-                function addMarker(coords, name) {
+                function addMarker(coords, info) {
                     var marker = new google.maps.Marker({
                         position:coords,
                         map:map,
                         icon:'/images/cross.png'
+                    })
+
+                    console.log(coords, info)
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content:info
+                    });
+
+                    marker.addListener('click', function(){
+                        infoWindow.open(map, marker)
                     })
                 }
             });
