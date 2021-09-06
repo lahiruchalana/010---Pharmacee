@@ -102,3 +102,9 @@ function filteredTable() {
         }
     }
 }
+
+$('.dropdown').click(function(){
+
+    $('.dropdown-menu').toggleClass('show');
+
+});
