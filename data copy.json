@@ -1,4 +1,5 @@
-[
+{
+    "Sheet1": [
     {"District":"Ampara","Name":"Orryngo Pharmacy","Address":"Main Street, Addalaichenai","Phone":"+94672277036","WhatsApp":"+94772660787","Viber":"+94772660787","MoH":"Addalaichenai","Latitude":"7.2481389","Longitude":"81.8521759","Latlong":"7.2481389,81.8521759"},
     {"District":"Ampara","Name":"Osu Sala, Akkaraipattu","Address":"74, TD/02, Akkaraipattu","Phone":"+94672057625","WhatsApp":"+94773710480","Viber":"+94773710480","MoH":"Akkaraipattu","Latitude":"7.2223386","Longitude":"81.8501348","Latlong":"7.2223386,81.8501348"},
     {"District":"Ampara","Name":"BIO pharmacy","Address":"Main Street Akkaraipattu","Phone":"+94770367674","WhatsApp":"+94770367674","Viber":"","MoH":"Akkaraipattu","Latitude":"7.2332732","Longitude":"81.8516916","Latlong":"7.2332732,81.8516916"},
@@ -1772,3 +1773,4 @@
     {"District":"Vavuniya","Name":"Get well health care","Address":"Vavuniya","Phone":"+94773134760","WhatsApp":"+94773134760","Viber":"","MoH":"Vavuniya","Latitude":"8.760033","Longitude":"80.500356","Latlong":"8.760033,80.500356"},
     {"District":"Vavuniya","Name":"Indrajith Pharmacy","Address":"C14, New Bus Stand Complex, Nedunkerny","Phone":"+94242053019","WhatsApp":"+94774445335","Viber":"+94774445335","MoH":"Vavuniya North","Latitude":"9.05329","Longitude":"80.6513543","Latlong":"9.05329,80.6513543"}
     ]
+}

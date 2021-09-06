@@ -108,3 +108,8 @@ $('.dropdown').click(function(){
     $('.dropdown-menu').toggleClass('show');
 
 });
+
+function getLanguage() {
+    let selectedLanguage = document.getElementById(language).value
+    console.log(selectedLanguage)
+}
