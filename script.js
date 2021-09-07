@@ -1,21 +1,18 @@
 var json = [];
 
 getData("english")
-
 $('#Sinhala').click(function(){
     let language = "sinhala"
     console.log(language)
     $('#table tbody').html('');
     getData(language)
 });
-
 $('#English').click(function(){
     let language = "english"
     console.log(language)
     $('#table tbody').html('');
     getData(language)
 });
-
 $('#Tamil').click(function(){
     let language = "tamil"
     console.log(language)
