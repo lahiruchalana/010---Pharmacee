@@ -1,5 +1,5 @@
 var json = [];
-$.getJSON("data.json", function (data) {
+$.getJSON("Data/english.json", function (data) {
     var pharmacy = [];
     $.each(data, function (key, value) {
         pharmacy += '<tr>';
