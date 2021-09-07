@@ -1,23 +1,29 @@
 var json = [];
 
 getData("english")
+getDistrictResults("english")
+
 $('#Sinhala').click(function(){
     let language = "sinhala"
     console.log(language)
     $('#table tbody').html('');
     getData(language)
+    getDistrictResults(language)
+    changeDistrictLanguage(language)
 });
 $('#English').click(function(){
     let language = "english"
     console.log(language)
     $('#table tbody').html('');
     getData(language)
+    getDistrictResults(language)
 });
 $('#Tamil').click(function(){
     let language = "tamil"
     console.log(language)
     $('#table tbody').html('');
     getData(language)
+    getDistrictResults(language)
 });
 
 function getData(language) {
@@ -53,12 +59,32 @@ function getData(language) {
     });
 }
 
-
-$('#districtButtons button').click(function(event) {
-    var districtVal = this.textContent.toLowerCase()
-    console.log(districtVal)
-    filteredTableByDisctrict(districtVal)
-});
+function getDistrictResults(language) {
+    $('#districtButtons button').click(function(event) {
+        var districtVal = this.textContent
+        if (language.includes("sinhala")) {
+            console.log(`filter with ${language} language`)
+            if (districtVal.includes("Ampara")) {
+                districtVal = "අම්පාර"
+                console.log(districtVal)
+                filteredTableByDisctrict(districtVal)
+            } else if (districtVal.includes("Anuradhapura")) {
+                districtVal = "අනුරාධපුර"
+                console.log(districtVal)
+                filteredTableByDisctrict(districtVal)
+            } else {
+                districtVal = "කොළඹ"
+                console.log(districtVal)
+                filteredTableByDisctrict(districtVal)
+            }
+        } else if (language.includes("tamil")) {
+            console.log(`filter with ${language} language`)
+        } else {
+            console.log(districtVal)
+            filteredTableByDisctrict(districtVal)
+        }
+    });
+}
 
 
 function filteredTableByDisctrict(districtVal) {
@@ -67,7 +93,7 @@ function filteredTableByDisctrict(districtVal) {
     $('#table tbody').html('');
     for (var i=0 ; i < json.length ; i++)
     {
-        if ((json[i][District].toLowerCase()).includes(districtVal)) {
+        if ((json[i][District]).includes(districtVal)) {
             filterDataForDistrict()
         } 
         function filterDataForDistrict() {
@@ -126,6 +152,16 @@ function filteredTable() {
     }
 }
 
+function changeDistrictLanguage(language) {
+    if (language.includes("sinhala") ) {
+        var ampara = document.getElementById(Ampara)
+        ampara.innerHTML = "somethinga"
+        var anuradhapura = document.getElementById(Anuradhapura)
+        anuradhapura.innerHTML = "අනුරාධපුර"
+    } else if (language.includes("tamil")) {
+        document.getElementById(Ampara).textContent.innerHTML = "அம்பாறை"
+    }
+}
 
 
 $('.dropdown').click(function(){
