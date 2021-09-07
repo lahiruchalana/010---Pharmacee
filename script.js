@@ -1,34 +1,60 @@
 var json = [];
-$.getJSON("Data/english.json", function (data) {
-    var pharmacy = [];
-    $.each(data, function (key, value) {
-        pharmacy += '<tr>';
-        pharmacy += '<td>' + 
-            value.District + '</td>';
 
-            pharmacy += '<td>' + 
-            value.Name + '</td>';
+getData("english")
 
-            pharmacy += '<td>' + 
-            value.Address + '</td>';
-
-            pharmacy += '<td>' + 
-            value.Phone + '</td>';
-
-            pharmacy += '<td>' + 
-            value.WhatsApp + '</td>';
-
-            pharmacy += '<td>' + 
-            value.Viber + '</td>';
-
-            pharmacy += '<td>' + 
-            value.MoH + '</td>';
-
-        pharmacy += '</tr>';
-    })
-    json = data;
-    $('#table tbody').append(pharmacy);
+$('#Sinhala').click(function(){
+    let language = "sinhala"
+    console.log(language)
+    $('#table tbody').html('');
+    getData(language)
 });
+
+$('#English').click(function(){
+    let language = "english"
+    console.log(language)
+    $('#table tbody').html('');
+    getData(language)
+});
+
+$('#Tamil').click(function(){
+    let language = "tamil"
+    console.log(language)
+    $('#table tbody').html('');
+    getData(language)
+});
+
+function getData(language) {
+    $.getJSON(`Data/${language}.json`, function (data) {
+        var pharmacy = [];
+        $.each(data, function (key, value) {
+            pharmacy += '<tr>';
+            pharmacy += '<td>' + 
+                value.District + '</td>';
+    
+                pharmacy += '<td>' + 
+                value.Name + '</td>';
+    
+                pharmacy += '<td>' + 
+                value.Address + '</td>';
+    
+                pharmacy += '<td>' + 
+                value.Phone + '</td>';
+    
+                pharmacy += '<td>' + 
+                value.WhatsApp + '</td>';
+    
+                pharmacy += '<td>' + 
+                value.Viber + '</td>';
+    
+                pharmacy += '<td>' + 
+                value.MoH + '</td>';
+    
+            pharmacy += '</tr>';
+        })
+        json = data;
+        $('#table tbody').append(pharmacy);
+    });
+}
 
 
 $('#districtButtons button').click(function(event) {
@@ -103,13 +129,8 @@ function filteredTable() {
     }
 }
 
+
+
 $('.dropdown').click(function(){
-
     $('.dropdown-menu').toggleClass('show');
-
 });
-
-function getLanguage() {
-    let selectedLanguage = document.getElementById(language).value
-    console.log(selectedLanguage)
-}
