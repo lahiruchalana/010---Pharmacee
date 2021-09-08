@@ -1,8 +1,10 @@
 var json = [];
 
+// Default table --> English Table
 getData("english")
 getDistrictResults("english")
 
+// Click on Sinhala language button
 $('#Sinhala').click(function(){
     let language = "sinhala"
     console.log(language)
@@ -11,6 +13,8 @@ $('#Sinhala').click(function(){
     getDistrictResults(language)
     changeDistrictLanguage(language)
 });
+
+// Click on English language button
 $('#English').click(function(){
     let language = "english"
     console.log(language)
@@ -18,6 +22,8 @@ $('#English').click(function(){
     getData(language)
     getDistrictResults(language)
 });
+
+// Click on Tamil language button
 $('#Tamil').click(function(){
     let language = "tamil"
     console.log(language)
@@ -26,6 +32,7 @@ $('#Tamil').click(function(){
     getDistrictResults(language)
 });
 
+// English/SInhala/Tamil Tables display function
 function getData(language) {
     $.getJSON(`Data/${language}.json`, function (data) {
         var pharmacy = [];
@@ -59,6 +66,7 @@ function getData(language) {
     });
 }
 
+// this function to filter dictrict by SInhala and Tamil languages
 function getDistrictResults(language) {
     $('#districtButtons button').click(function(event) {
         var districtVal = this.textContent
@@ -120,7 +128,7 @@ function getDistrictResults(language) {
     });
 }
 
-
+// English/Sinhala/Tamil languages dictrict filter 
 function filteredTableByDisctrict(districtVal) {
     var districts = [];
     var District = "District";
@@ -148,7 +156,7 @@ function filteredTableByDisctrict(districtVal) {
     }
 }
 
-
+// English language search function
 function filteredTable() {
     var results = [];
     var District = "District";
@@ -216,13 +224,12 @@ function changeDistrictLanguage(language) {
         document.getElementById('Ratnapura').textContent   = 'රත්නපුර';
         document.getElementById('Trincomalee').textContent   = 'ත්රිකුණාමලය';
         document.getElementById('Vavuniya').textContent   = 'වවුනියාව';
-        console.log("in the changeDistrictLanguage function")
     } else if (language.includes("tamil")) {
         document.getElementById('Ampara').textContent.innerHTML = "அம்பாறை"
     }
 }
 
-
+// Display two(language and province dropdowns)
 $('.dropdown').click(function(){
     $('.dropdown-menu').toggleClass('show');
 });
