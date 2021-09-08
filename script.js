@@ -17,7 +17,6 @@ $('#Sinhala').click(function(){
 // Click on English language button
 $('#English').click(function(){
     let language = "english"
-    console.log(language)
     $('#table tbody').html('');
     getData(language)
     getDistrictResults(language)
@@ -26,7 +25,6 @@ $('#English').click(function(){
 // Click on Tamil language button
 $('#Tamil').click(function(){
     let language = "tamil"
-    console.log(language)
     $('#table tbody').html('');
     getData(language)
     getDistrictResults(language)
@@ -121,9 +119,6 @@ function getDistrictResults(language) {
             }
         } else if (language.includes("tamil")) {
             console.log(`filter with ${language} language`)
-        } else {
-            console.log(districtVal)
-            filteredTableByDisctrict(districtVal)
         }
     });
 }
@@ -225,7 +220,63 @@ function changeDistrictLanguage(language) {
         document.getElementById('Trincomalee').textContent   = 'ත්රිකුණාමලය';
         document.getElementById('Vavuniya').textContent   = 'වවුනියාව';
     } else if (language.includes("tamil")) {
-        document.getElementById('Ampara').textContent.innerHTML = "அம்பாறை"
+        // change button names when select sinhala language
+        document.getElementById('provinceSelector').textContent   = 'පලාත තෝරන්න';
+        document.getElementById('languageSelector').textContent   = 'භාශාව තෝරන්න';
+        document.getElementById('search').placeholder   = 'ෆාමසියේ නමින්, නගරයකින්, ගමකින් ඔබේ ෆාමසිය සොයන්න...';
+        // change district names when select sinhala language
+        document.getElementById('Ampara').textContent   = 'අම්පාර';
+        document.getElementById('Anuradhapura').textContent   = 'අනුරාධපුර';
+        document.getElementById('Badulla').textContent   = 'බදුල්ල';
+        document.getElementById('Batticaloa').textContent   = 'මඩකලපුව';
+        document.getElementById('Colombo').textContent   = 'කොළඹ';
+        document.getElementById('Galle').textContent   = 'ගාල්ල';
+        document.getElementById('Gampaha').textContent   = 'ගම්පහ';
+        document.getElementById('Hambantota').textContent   = 'හම්බන්තොට';
+        document.getElementById('Jaffna').textContent   = 'යාපනය';
+        document.getElementById('Kalutara').textContent   = 'කළුතර';
+        document.getElementById('Kandy').textContent   = 'මහනුවර';
+        document.getElementById('Kegalle').textContent   = 'කෑගල්ල';
+        document.getElementById('Kurunegala').textContent   = 'කුරුණෑගල';
+        document.getElementById('Matale').textContent   = 'මාතලේ';
+        document.getElementById('Matara').textContent   = 'මාතර';
+        document.getElementById('Monaragala').textContent   = 'මොණරගල';
+        document.getElementById('Mullaitivu').textContent   = 'මුලතිව්';
+        document.getElementById('Nuwara-Eliya').textContent   = 'නුවරඑලිය';
+        document.getElementById('Polonnaruwa').textContent   = 'පොළොන්නරුව';
+        document.getElementById('Puttalam').textContent   = 'පුත්තලම';
+        document.getElementById('Ratnapura').textContent   = 'රත්නපුර';
+        document.getElementById('Trincomalee').textContent   = 'ත්රිකුණාමලය';
+        document.getElementById('Vavuniya').textContent   = 'වවුනියාව';
+    } else if (language.includes("english")) {
+        // change button names when select sinhala language
+        document.getElementById('provinceSelector').textContent   = 'පලාත තෝරන්න';
+        document.getElementById('languageSelector').textContent   = 'භාශාව තෝරන්න';
+        document.getElementById('search').placeholder   = 'ෆාමසියේ නමින්, නගරයකින්, ගමකින් ඔබේ ෆාමසිය සොයන්න...';
+        // change district names when select sinhala language
+        document.getElementById('Ampara').textContent   = 'අම්පාර';
+        document.getElementById('Anuradhapura').textContent   = 'අනුරාධපුර';
+        document.getElementById('Badulla').textContent   = 'බදුල්ල';
+        document.getElementById('Batticaloa').textContent   = 'මඩකලපුව';
+        document.getElementById('Colombo').textContent   = 'කොළඹ';
+        document.getElementById('Galle').textContent   = 'ගාල්ල';
+        document.getElementById('Gampaha').textContent   = 'ගම්පහ';
+        document.getElementById('Hambantota').textContent   = 'හම්බන්තොට';
+        document.getElementById('Jaffna').textContent   = 'යාපනය';
+        document.getElementById('Kalutara').textContent   = 'කළුතර';
+        document.getElementById('Kandy').textContent   = 'මහනුවර';
+        document.getElementById('Kegalle').textContent   = 'කෑගල්ල';
+        document.getElementById('Kurunegala').textContent   = 'කුරුණෑගල';
+        document.getElementById('Matale').textContent   = 'මාතලේ';
+        document.getElementById('Matara').textContent   = 'මාතර';
+        document.getElementById('Monaragala').textContent   = 'මොණරගල';
+        document.getElementById('Mullaitivu').textContent   = 'මුලතිව්';
+        document.getElementById('Nuwara-Eliya').textContent   = 'නුවරඑලිය';
+        document.getElementById('Polonnaruwa').textContent   = 'පොළොන්නරුව';
+        document.getElementById('Puttalam').textContent   = 'පුත්තලම';
+        document.getElementById('Ratnapura').textContent   = 'රත්නපුර';
+        document.getElementById('Trincomalee').textContent   = 'ත්රිකුණාමලය';
+        document.getElementById('Vavuniya').textContent   = 'වවුනියාව';
     }
 }
 
@@ -235,5 +286,5 @@ $('.dropdown').click(function(){
 });
 
 $('.dropdownForProvince').click(function(){
-    $('.dropdown-menu2').toggleClass('show');
+    $('.dropdown-menu').toggleClass('show');
 });
