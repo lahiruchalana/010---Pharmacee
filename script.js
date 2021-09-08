@@ -64,19 +64,16 @@ function getDistrictResults(language) {
         var districtVal = this.textContent
         if (language.includes("sinhala")) {
             console.log(`filter with ${language} language`)
-            if (districtVal.includes("Ampara")) {
-                districtVal = "අම්පාර"
-                console.log(districtVal)
+            if (districtVal.includes("අම්පාර")) {
                 filteredTableByDisctrict(districtVal)
-            } else if (districtVal.includes("Anuradhapura")) {
-                districtVal = "අනුරාධපුර"
-                console.log(districtVal)
+            } else if (districtVal.includes("අනුරාධපුර")) {
                 filteredTableByDisctrict(districtVal)
             } else {
                 districtVal = "කොළඹ"
-                console.log(districtVal)
                 filteredTableByDisctrict(districtVal)
             }
+
+
         } else if (language.includes("tamil")) {
             console.log(`filter with ${language} language`)
         } else {
@@ -154,16 +151,43 @@ function filteredTable() {
 
 function changeDistrictLanguage(language) {
     if (language.includes("sinhala") ) {
-        var ampara = document.getElementById(Ampara)
-        ampara.innerHTML = "somethinga"
-        var anuradhapura = document.getElementById(Anuradhapura)
-        anuradhapura.innerHTML = "අනුරාධපුර"
+        // change button names when select sinhala language
+        document.getElementById('provinceSelector').textContent   = 'පලාත තෝරන්න';
+        document.getElementById('languageSelector').textContent   = 'භාශාව තෝරන්න';
+        document.getElementById('search').placeholder   = 'ෆාමසියේ නමින්, නගරයකින්, ගමකින් ඔබේ ෆාමසිය සොයන්න...';
+        // change district names when select sinhala language
+        document.getElementById('Ampara').textContent   = 'අම්පාර';
+        document.getElementById('Anuradhapura').textContent   = 'අනුරාධපුර';
+        document.getElementById('Badulla').textContent   = 'බදුල්ල';
+        document.getElementById('Batticaloa').textContent   = 'මඩකලපුව';
+        document.getElementById('Colombo').textContent   = 'කොලඹ';
+        document.getElementById('Galle').textContent   = 'ගාල්ල';
+        document.getElementById('Gampaha').textContent   = 'ගම්පහ';
+        document.getElementById('Hambantota').textContent   = 'හම්බන්තොට';
+        document.getElementById('Jaffna').textContent   = 'යාපනය';
+        document.getElementById('Kalutara').textContent   = 'කලුතර';
+        document.getElementById('Kandy').textContent   = 'මහනුවර';
+        document.getElementById('Kegalle').textContent   = 'කෑගල්ල';
+        document.getElementById('Kurunegala').textContent   = 'කුරුණෑගල';
+        document.getElementById('Matale').textContent   = 'මාතලේ';
+        document.getElementById('Monaragala').textContent   = 'මොනරාගල';
+        document.getElementById('Nuwara-Eliya').textContent   = 'නුවරඑලිය';
+        document.getElementById('Polonnaruwa').textContent   = 'පොලොන්නරුව';
+        document.getElementById('Puttalam').textContent   = 'පුත්තලම';
+        document.getElementById('Ratnapura').textContent   = 'රත්නපුර';
+        document.getElementById('Trincomalee').textContent   = 'ත්‍රිකුනාමලය';
+        document.getElementById('Vavuniya').textContent   = 'වව්නියාව';
+        console.log("in the changeDistrictLanguage function")
     } else if (language.includes("tamil")) {
-        document.getElementById(Ampara).textContent.innerHTML = "அம்பாறை"
+        document.getElementById('Ampara').textContent.innerHTML = "அம்பாறை"
     }
 }
 
 
 $('.dropdown').click(function(){
     $('.dropdown-menu').toggleClass('show');
+});
+
+$('.dropdownForProvince').click(function(){
+    $('.dropdown-menu2').toggleClass('show');
 });
