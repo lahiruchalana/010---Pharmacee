@@ -176,6 +176,16 @@ function changeDistrictLanguage(language) {
         document.getElementById('Ratnapura').textContent   = 'රත්නපුර';
         document.getElementById('Trincomalee').textContent   = 'ත්රිකුණාමලය';
         document.getElementById('Vavuniya').textContent   = 'වවුනියාව';
+        // change province names when select sinhala language
+        document.getElementById('Western').textContent   = 'බස්නාහිර';
+        document.getElementById('Southern').textContent   = 'දකුණ';
+        document.getElementById('Central').textContent   = 'මධ්‍යම';
+        document.getElementById('Sabaragamuwa').textContent   = 'සබරගමුව';
+        document.getElementById('NorthCentral').textContent   = 'උතුරු මැද';
+        document.getElementById('Uva').textContent   = 'ඌව';
+        document.getElementById('NorthWestern').textContent   = 'වයඹ';
+        document.getElementById('Eastern').textContent   = 'නැගෙනහිර';
+        document.getElementById('Northern').textContent   = 'උතුර';
     } else if (language.includes("tamil")) {
         // change button names when select tamil language
         document.getElementById('provinceSelector').textContent   = 'மாகாணத்தைத்';
@@ -205,6 +215,16 @@ function changeDistrictLanguage(language) {
         document.getElementById('Ratnapura').textContent   = 'இரத்தினபுரி';
         document.getElementById('Trincomalee').textContent   = 'திருகோணமலை';
         document.getElementById('Vavuniya').textContent   = 'வவுனியா';
+        // change province names when select tamil language
+        document.getElementById('Western').textContent   = 'மேற்கு';
+        document.getElementById('Southern').textContent   = 'தெற்கு';
+        document.getElementById('Central').textContent   = 'மத்திய';
+        document.getElementById('Sabaragamuwa').textContent   = 'சப்ரகமுவா';
+        document.getElementById('NorthCentral').textContent   = 'வட மையம்';
+        document.getElementById('Uva').textContent   = 'திராட்சை';
+        document.getElementById('NorthWestern').textContent   = 'வடமேற்கு';
+        document.getElementById('Eastern').textContent   = 'கிழக்கு';
+        document.getElementById('Northern').textContent   = 'வடக்கு';
     } else if (language.includes("english")) {
         // change button names when select english language
         document.getElementById('provinceSelector').textContent   = 'Select Province';
@@ -234,6 +254,16 @@ function changeDistrictLanguage(language) {
         document.getElementById('Ratnapura').textContent   = 'Ratnapura';
         document.getElementById('Trincomalee').textContent   = 'Trincomalee';
         document.getElementById('Vavuniya').textContent   = 'Vavuniya';
+        // change province names when select english language
+        document.getElementById('Western').textContent   = 'Western';
+        document.getElementById('Southern').textContent   = 'Southern';
+        document.getElementById('Central').textContent   = 'Central';
+        document.getElementById('Sabaragamuwa').textContent   = 'Sabaragamuwa';
+        document.getElementById('NorthCentral').textContent   = 'North Central';
+        document.getElementById('Uva').textContent   = 'Uva';
+        document.getElementById('NorthWestern').textContent   = 'North Western';
+        document.getElementById('Eastern').textContent   = 'Eastern';
+        document.getElementById('Northern').textContent   = 'Northern';
     }
 }
 
