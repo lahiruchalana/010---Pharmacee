@@ -81,7 +81,7 @@
                 let language = "tamil"
                 getLanguageByData(language)
             });
-
+            // function to get lat lons with info with english, sinhala and tamil language
             function getLanguageByData(language) {
                 $.getJSON(`Data/${language}.json`, function (data) {
                     $.each(data, function (key, value) {
