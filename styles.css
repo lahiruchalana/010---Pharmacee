@@ -9,3 +9,27 @@
   margin-left: 10px;
   width: 80px;
 }
+
+.dropdown .dropdown-menu a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.dropdown-menu .dropdown-item {
+  display: inline-block;
+  width: 100%;
+  background-color: #2b292b;
+}
+.container .dropdown .dropdown-menu a:hover {
+  color: rgb(56, 56, 56);
+  background-color: #0a0a0a;
+  border-color: rgb(0, 0, 0);
+}
+
+.dropdown-menu .dropdown-item:hover {
+  color: #0a0a0a;
+}
+
+.dropdown-menu .dropdown-item:active {
+  color: #6d6580;
+}

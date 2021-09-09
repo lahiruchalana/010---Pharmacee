@@ -239,7 +239,7 @@ function changeDistrictLanguage(language) {
 
 // Display two(language and province dropdowns)
 $('#dropdownForLanguage').click(function(){
-    $('.dropdown-menu').toggleClass('show');
+    $('#languageDropdown').toggleClass('show');
 });
 
 $('#dropdownForProvince').click(function(){
