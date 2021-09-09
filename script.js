@@ -177,11 +177,11 @@ function changeDistrictLanguage(language) {
         document.getElementById('Trincomalee').textContent   = 'ත්රිකුණාමලය';
         document.getElementById('Vavuniya').textContent   = 'වවුනියාව';
     } else if (language.includes("tamil")) {
-        // change button names when select sinhala language
+        // change button names when select tamil language
         document.getElementById('provinceSelector').textContent   = 'மாகாணத்தைத்';
         document.getElementById('languageSelector').textContent   = 'மொழியை தேர்ந்தெடுங்கள்';
         document.getElementById('search').placeholder   = 'மருந்தகம், நகரம் அல்லது கிராமத்தின் பெயரால் உங்கள் மருந்தகத்தைக் கண்டறியவும் ...';
-        // change district names when select sinhala language
+        // change district names when select tamil language
         document.getElementById('Ampara').textContent   = 'அம்பாறை';
         document.getElementById('Anuradhapura').textContent   = 'அனுராதபுரம்';
         document.getElementById('Badulla').textContent   = 'பதுளை';
@@ -206,11 +206,11 @@ function changeDistrictLanguage(language) {
         document.getElementById('Trincomalee').textContent   = 'திருகோணமலை';
         document.getElementById('Vavuniya').textContent   = 'வவுனியா';
     } else if (language.includes("english")) {
-        // change button names when select sinhala language
+        // change button names when select english language
         document.getElementById('provinceSelector').textContent   = 'Select Province';
         document.getElementById('languageSelector').textContent   = 'Select Language';
         document.getElementById('search').placeholder   = 'Search By District, Pharmacy Name, Address or MOH...';
-        // change district names when select sinhala language
+        // change district names when select english language
         document.getElementById('Ampara').textContent   = 'Ampara';
         document.getElementById('Anuradhapura').textContent   = 'Anuradhapura';
         document.getElementById('Badulla').textContent   = 'Badulla';
@@ -238,10 +238,10 @@ function changeDistrictLanguage(language) {
 }
 
 // Display two(language and province dropdowns)
-$('.dropdown').click(function(){
+$('#dropdownForLanguage').click(function(){
     $('.dropdown-menu').toggleClass('show');
 });
 
-$('.dropdownForProvince').click(function(){
-    $('.dropdown-menu').toggleClass('show');
+$('#dropdownForProvince').click(function(){
+    $('#provinceDropdown').toggleClass('show');
 });
