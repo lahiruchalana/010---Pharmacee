@@ -32,6 +32,7 @@ $('#Tamil').click(function(){
     $('#table tbody').html('');
     getData(language)
     getDistrictResults(language)
+    getProvinceResults(language)
     changeDistrictLanguage(language)
 });
 
@@ -124,27 +125,27 @@ function getProvinceResults(language) {
             } else if (provinceVal.includes("கிழக்கு")) {
                 filteredTableByDisctrict("அம்பாறை", "மட்டக்களப்பு", "திருகோணமலை")
             } else if (provinceVal.includes("வடக்கு")) {
-                filteredTableByDisctrict("யாழ்", "முல்லைத்தீவு", "வவுனியா")
+                filteredTableByDisctrict("யாழ்ப்பாணம்", "முல்லைத்தீவு", "வவுனியா")
             }        
         } else {
-            if (provinceVal.includes("බස්නාහිර")) {
-                filteredTableByDisctrict("කොළඹ", "ගම්පහ", "කළුතර")
-            } else if (provinceVal.includes("දකුණ")) {
-                filteredTableByDisctrict("ගාල්ල", "හම්බන්තොට", "මාතර")
-            } else if (provinceVal.includes("මධ්‍යම")) {
-                filteredTableByDisctrict("මහනුවර", "මාතලේ", "නුවරඑලිය")
-            } else if (provinceVal.includes("සබරගමුව")) {
-                filteredTableByDisctrict("කෑගල්ල", "රත්නපුර")
-            } else if (provinceVal.includes("උතුරු මැද")) {
-                filteredTableByDisctrict("අනුරාධපුර", "පොළොන්නරුව")
-            } else if (provinceVal.includes("ඌව")) {
-                filteredTableByDisctrict("බදුල්ල", "මොණරගල")
-            } else if (provinceVal.includes("වයඹ")) {
-                filteredTableByDisctrict("කුරුණෑගල", "පුත්තලම")
-            } else if (provinceVal.includes("නැගෙනහිර")) {
-                filteredTableByDisctrict("අම්පාර", "මඩකලපුව", "ත්රිකුණාමලය")
-            } else if (provinceVal.includes("උතුර")) {
-                filteredTableByDisctrict("යාපනය", "මුලතිව්", "වවුනියාව")
+            if (provinceVal.includes("Western")) {
+                filteredTableByDisctrict("Colombo", "Gampaha", "Kalutara")
+            } else if (provinceVal.includes("Southern")) {
+                filteredTableByDisctrict("Galle", "Hambantota", "Matara")
+            } else if (provinceVal.includes("Central")) {
+                filteredTableByDisctrict("Kandy", "Matale", "Nuwara-Eliya")
+            } else if (provinceVal.includes("Sabaragamuwa")) {
+                filteredTableByDisctrict("Kegalle", "Ratnapura")
+            } else if (provinceVal.includes("Northcentral")) {
+                filteredTableByDisctrict("Anuradhapura", "Polonnaruwa")
+            } else if (provinceVal.includes("Uva")) {
+                filteredTableByDisctrict("Badulla", "Monaragala")
+            } else if (provinceVal.includes("Northwestern")) {
+                filteredTableByDisctrict("Kurunegala", "Puttalam")
+            } else if (provinceVal.includes("Eastern")) {
+                filteredTableByDisctrict("Ampara", "Batticaloa", "Trincomalee")
+            } else if (provinceVal.includes("Northern")) {
+                filteredTableByDisctrict("Jaffna", "Mullaitivu", "Vavuniya")
             }
         }
     });
@@ -270,7 +271,7 @@ function changeDistrictLanguage(language) {
         document.getElementById('Galle').textContent   = 'காலி';
         document.getElementById('Gampaha').textContent   = 'கம்பஹா';
         document.getElementById('Hambantota').textContent   = 'அம்பாந்தோட்டை';
-        document.getElementById('Jaffna').textContent   = 'யாழ்';
+        document.getElementById('Jaffna').textContent   = 'யாழ்ப்பாணம்';
         document.getElementById('Kalutara').textContent   = 'களுத்துறை';
         document.getElementById('Kandy').textContent   = 'கண்டி';
         document.getElementById('Kegalle').textContent   = 'கேகாலை';
@@ -329,9 +330,9 @@ function changeDistrictLanguage(language) {
         document.getElementById('Southern').textContent   = 'Southern';
         document.getElementById('Central').textContent   = 'Central';
         document.getElementById('Sabaragamuwa').textContent   = 'Sabaragamuwa';
-        document.getElementById('NorthCentral').textContent   = 'North Central';
+        document.getElementById('NorthCentral').textContent   = 'Northcentral';
         document.getElementById('Uva').textContent   = 'Uva';
-        document.getElementById('NorthWestern').textContent   = 'North Western';
+        document.getElementById('NorthWestern').textContent   = 'Northwestern';
         document.getElementById('Eastern').textContent   = 'Eastern';
         document.getElementById('Northern').textContent   = 'Northern';
     }
