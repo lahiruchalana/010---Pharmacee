@@ -43,76 +43,25 @@
                         <li><a id="Tamil" class="dropdown-item" href="#">தமிழ்</a></li>
                     </ul>
                 </div>
-                <!-- <input id="pac-input" class="controls" type="text" placeholder="Search Box"/> -->
-                <!-- <button id="myLocationButton" type="button" class="btn btn-primary" style="width: 250px; margin-right: -1100px; margin-top: 10px;">My Location</button> -->
+                <!-- <input style="width: 450px; margin-right: 30px;" class="form-control mr-sm-2"  type="text" name="search" id="searchByTown" placeholder="Search by Town..." aria-label="Search"> -->
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+                <button id="myLocationButton" type="button" class="btn btn-primary" style="width: 250px; margin-right: -1100px; margin-top: 10px;">My Location</button>
             </div> 
         </nav>
     </div>
-    <select id="radius_km" style="z-index: 100;">
-        <option value=1>1km</option>
-        <option value=2>2km</option>
-        <option value=5>5km</option>
-        <option value=30>30km</option>
-    </select>
 
-    <div id="map" style="z-index: 0;"></div>
+    <div id="map"></div>
     <script>
         function initMap() {
-            var map = null;
-            var radius_circle = null;
-            var markers_on_map = [];
-            
-            //all_locations is just a sample, you will probably load those from database
-            var all_locations = [
-                {type: "Restaurant", name: "Restaurant 1", lat: 40.723080, lng: -73.984340},
-                {type: "School", name: "School 1", lat: 40.724705, lng: -73.986611},
-                {type: "School", name: "School 2", lat: 40.724165, lng: -73.983883},
-                {type: "Restaurant", name: "Restaurant 2", lat: 40.721819, lng: -73.991358},
-                {type: "School", name: "School 3", lat: 40.732056, lng: -73.998683}
-            ];
+            var options = {
+                zoom:14,
+                center:{lat:6.9271,lng:79.8612}
+            }
 
-            //initialize map on document ready
-            $(document).ready(function(){
-                var latlng = new google.maps.LatLng(6.9271, 79.8612); //you can use any location as center on map startup
-                var myOptions = {
-                    zoom: 14,
-                    center: latlng,
-                    mapTypeControl: true,
-                    mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
-                    navigationControl: true,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                map = new google.maps.Map(document.getElementById("map"), myOptions);
-                
-                google.maps.event.addListener(map, 'click', showCloseLocations);
-            });
-            
-            function showCloseLocations(e) {
-                var i;
-                var radius_km = $('#radius_km').val();
-                var address = $('#address').val();
+            var map = new
+            google.maps.Map(document.getElementById('map'), options)
 
-                //remove all radii and markers from map before displaying new ones
-                if (radius_circle) {
-                    radius_circle.setMap(null);
-                    radius_circle = null;
-                }
-                for (i = 0; i < markers_on_map.length; i++) {
-                    if (markers_on_map[i]) {
-                        markers_on_map[i].setMap(null);
-                        markers_on_map[i] = null;
-                    }
-                }
-                
-                var address_lat_lng = e.latLng;
-                radius_circle = new google.maps.Circle({
-                    center: address_lat_lng,
-                    radius: radius_km * 1000,
-                    clickable: false,
-                    map: map
-                });
-                if(radius_circle) map.fitBounds(radius_circle.getBounds());
-                // Default table --> English Table
+            // Default table --> English Table
             getLanguageByData("english")
 
             // Click on Sinhala language button
@@ -133,10 +82,9 @@
                 getLanguageByData(language)
             });
             // function to get lat lons with info with english, sinhala and tamil language
-                function getLanguageByData(language) {
+            function getLanguageByData(language) {
                 $.getJSON(`Data/${language}.json`, function (data) {
                     $.each(data, function (key, value) {
-                        let infoWindow = new google.maps.InfoWindow();
                         var latitude = parseFloat(value.Latitude)
                         var longitude = parseFloat(value.Longitude)
                         var coords = {lat:latitude,lng:longitude}
@@ -150,32 +98,26 @@
                         + `<h6>Phone : ${phone}</h6>`
                         + `<h6>WhatsApp : ${whatsApp}</h6>` 
                         + `<h6>Viber : ${viber}</h6>`
-                        var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
-                        var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
-                        if (distance_from_location <= radius_km * 1000) {
-                            var new_marker = new google.maps.Marker({
-                                position: marker_lat_lng,
-                                map: map,
-                                title: name
-                            });
-                            google.maps.event.addListener(new_marker, 'click', function () {
-                                const pos = {
-                                    lat: latitude,
-                                    lng: longitude,
-                                };
-                                infoWindow.setPosition(pos);
-                                infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location/1000}  Km </h5>`);
-                                infoWindow.open(map);
-                                map.setCenter(pos);
-                            });
-                            markers_on_map.push(new_marker);
-                        }
-                    })(all_locations[j]);
+                        addMarker(coords, info)
+                    });
+                    
+                    function addMarker(coords, info) {
+                        var marker = new google.maps.Marker({
+                            position:coords,
+                            map:map,
+                            icon:'/images/cross.png'
+                        })
+                        console.log(coords, info)
+                        var infoWindow = new google.maps.InfoWindow({
+                            content:info
+                        });
+                        marker.addListener('click', function(){
+                            infoWindow.open(map, marker)
+                        })
+                    }
                 });
-                }
             }
 
-            // search my location
             let infoWindow = new google.maps.InfoWindow();
             const locationButton = document.getElementById("myLocationButton");
             locationButton.textContent = "My Current Location";
@@ -249,7 +191,6 @@
             
             });
         }
-
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(
