@@ -185,8 +185,9 @@
                                         lat: latitude,
                                         lng: longitude,
                                     };
+                                    distance_from_location = distance_from_location/1000
                                     infoWindow.setPosition(pos);
-                                    infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location/1000}  Km </h5>`);
+                                    infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location.toFixed(2)}  Km </h5>`);
                                     infoWindow.open(map);
                                     map.setCenter(pos);
                                 });
