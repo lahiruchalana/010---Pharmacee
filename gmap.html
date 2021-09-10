@@ -32,8 +32,16 @@
         <nav class="navbar navbar-dark bg-dark" style="height: 70px;">
             <a class="navbar-brand" style="color: white; font-weight: 800;">PHARMACEE</a>
             <div class="form-inline">
-                <button type="button" class="btn btn-primary" style="width: 150px;" onClick="location.href='../index.html'">Home</button>
-                <div id="dropdownForLanguage" class="dropdown" style="margin-left: 10px;">
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+                <select id="radius_km" style="z-index: 100; margin-right: 10px; height: 38px; border-radius: 10px;">
+                    <option value=1>1km</option>
+                    <option value=2>2km</option>
+                    <option value=5>5km</option>
+                    <option value=30>30km</option>
+                </select>
+                <button id="myLocationButton" type="button" class="btn btn-primary" style="margin-right: 10px;">My Location</button>
+                <button type="button" class="btn btn-primary" style="width: 150px; margin-right: 10px;" onClick="location.href='../index.html'">Home</button>
+                <div id="dropdownForLanguage" class="dropdown" >
                     <button id="languageSelector" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                         Select Language
                     </button>
@@ -43,17 +51,9 @@
                         <li><a id="Tamil" class="dropdown-item" href="#">தமிழ்</a></li>
                     </ul>
                 </div>
-                <!-- <input id="pac-input" class="controls" type="text" placeholder="Search Box"/> -->
-                <!-- <button id="myLocationButton" type="button" class="btn btn-primary" style="width: 250px; margin-right: -1100px; margin-top: 10px;">My Location</button> -->
             </div> 
         </nav>
     </div>
-    <select id="radius_km" style="z-index: 100;">
-        <option value=1>1km</option>
-        <option value=2>2km</option>
-        <option value=5>5km</option>
-        <option value=30>30km</option>
-    </select>
 
     <div id="map" style="z-index: 0;"></div>
     <script>
