@@ -92,7 +92,7 @@
                 var radius_km = $('#radius_km').val();
                 var address = $('#address').val();
 
-                //remove all radii and markers from map before displaying new ones
+                //remove all radius and markers from map before displaying new ones
                 if (radius_circle) {
                     radius_circle.setMap(null);
                     radius_circle = null;
@@ -113,65 +113,65 @@
                 });
                 if(radius_circle) map.fitBounds(radius_circle.getBounds());
                 // Default table --> English Table
-            getLanguageByData("english")
+                getLanguageByData("english")
 
-            // Click on Sinhala language button
-            $('#Sinhala').click(function(){
-                let language = "sinhala"
-                getLanguageByData(language)
-            });
-
-            // Click on English language button
-            $('#English').click(function(){
-                let language = "english"
-                getLanguageByData(language)
-            });
-
-            // Click on Tamil language button
-            $('#Tamil').click(function(){
-                let language = "tamil"
-                getLanguageByData(language)
-            });
-            // function to get lat lons with info with english, sinhala and tamil language
-                function getLanguageByData(language) {
-                $.getJSON(`Data/${language}.json`, function (data) {
-                    $.each(data, function (key, value) {
-                        let infoWindow = new google.maps.InfoWindow();
-                        var latitude = parseFloat(value.Latitude)
-                        var longitude = parseFloat(value.Longitude)
-                        var coords = {lat:latitude,lng:longitude}
-                        var name = value.Name
-                        var address = value.Address
-                        var phone = value.Phone
-                        var whatsApp = value.WhatsApp
-                        var viber = value.Viber
-                        var info = `<h4>${name}</h4>` 
-                        + `<h6>${address}</h6>` 
-                        + `<h6>Phone : ${phone}</h6>`
-                        + `<h6>WhatsApp : ${whatsApp}</h6>` 
-                        + `<h6>Viber : ${viber}</h6>`
-                        var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
-                        var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
-                        if (distance_from_location <= radius_km * 1000) {
-                            var new_marker = new google.maps.Marker({
-                                position: marker_lat_lng,
-                                map: map,
-                                title: name
-                            });
-                            google.maps.event.addListener(new_marker, 'click', function () {
-                                const pos = {
-                                    lat: latitude,
-                                    lng: longitude,
-                                };
-                                infoWindow.setPosition(pos);
-                                infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location/1000}  Km </h5>`);
-                                infoWindow.open(map);
-                                map.setCenter(pos);
-                            });
-                            markers_on_map.push(new_marker);
-                        }
-                    })(all_locations[j]);
+                // Click on Sinhala language button
+                $('#Sinhala').click(function(){
+                    let language = "sinhala"
+                    getLanguageByData(language)
                 });
+
+                // Click on English language button
+                $('#English').click(function(){
+                    let language = "english"
+                    getLanguageByData(language)
+                });
+
+                // Click on Tamil language button
+                $('#Tamil').click(function(){
+                    let language = "tamil"
+                    getLanguageByData(language)
+                });
+                // function to get lat lons with info with english, sinhala and tamil language
+                function getLanguageByData(language) {
+                    $.getJSON(`Data/${language}.json`, function (data) {
+                        $.each(data, function (key, value) {
+                            let infoWindow = new google.maps.InfoWindow();
+                            var latitude = parseFloat(value.Latitude)
+                            var longitude = parseFloat(value.Longitude)
+                            var coords = {lat:latitude,lng:longitude}
+                            var name = value.Name
+                            var address = value.Address
+                            var phone = value.Phone
+                            var whatsApp = value.WhatsApp
+                            var viber = value.Viber
+                            var info = `<h4>${name}</h4>` 
+                            + `<h6>${address}</h6>` 
+                            + `<h6>Phone : ${phone}</h6>`
+                            + `<h6>WhatsApp : ${whatsApp}</h6>` 
+                            + `<h6>Viber : ${viber}</h6>`
+                            var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
+                            var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
+                            if (distance_from_location <= radius_km * 1000) {
+                                var new_marker = new google.maps.Marker({
+                                    position: marker_lat_lng,
+                                    map: map,
+                                    title: name
+                                });
+                                google.maps.event.addListener(new_marker, 'click', function () {
+                                    const pos = {
+                                        lat: latitude,
+                                        lng: longitude,
+                                    };
+                                    infoWindow.setPosition(pos);
+                                    infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location/1000}  Km </h5>`);
+                                    infoWindow.open(map);
+                                    map.setCenter(pos);
+                                });
+                                markers_on_map.push(new_marker);
+                            }
+                        })(all_locations[j]);
+                    });
                 }
             }
 
