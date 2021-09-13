@@ -118,6 +118,7 @@
                 });
             }
 
+            // search my location
             let infoWindow = new google.maps.InfoWindow();
             const locationButton = document.getElementById("myLocationButton");
             locationButton.textContent = "My Current Location";
@@ -191,6 +192,7 @@
             
             });
         }
+
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(
