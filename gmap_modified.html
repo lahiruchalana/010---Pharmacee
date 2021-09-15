@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pharmaceee | google map</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        #map {
+            height: 650px;
+            width: 100%;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="./mapstyle.css" />
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-dark bg-dark" style="height: 70px;">
+            <a class="navbar-brand" style="color: white; font-weight: 800;">PHARMACEE</a>
+            <div class="form-inline">
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+                <select id="radius_km" style="z-index: 100; margin-right: 10px; height: 38px; border-radius: 10px;">
+                    <option value=1>1km</option>
+                    <option value=2>2km</option>
+                    <option value=5>5km</option>
+                    <option value=30>30km</option>
+                </select>
+                <button type="button" class="btn btn-primary" style="width: 150px; margin-right: 10px;" onClick="location.href='../index.html'">Home</button>
+                <div id="dropdownForLanguage" class="dropdown" >
+                    <button id="languageSelector" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Language
+                    </button>
+                    <ul id="languageDropdown" class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                        <li><a id="Sinhala" class="dropdown-item" href="#">සිංහල</a></li>
+                        <li><a id="English" class="dropdown-item" href="#">English</a></li>
+                        <li><a id="Tamil" class="dropdown-item" href="#">தமிழ்</a></li>
+                    </ul>
+                </div>
+                <button id="myLocationButton" type="button" class="btn btn-primary" style="margin-left: 1200px; margin-top: 13px;">My Location</button>
+            </div> 
+        </nav>
+    </div>
+
+    <div id="map" style="z-index: 0;"></div>
+
+
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap">
+    </script>
+</body>
+</html>

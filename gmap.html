@@ -116,7 +116,7 @@
                         infoWindow.setContent("<h5>My Location.</h5>");
                         infoWindow.open(map);
                         map.setCenter(pos);
-                        google.maps.showMyCloseLocations(pos);
+                        showMyCloseLocations(pos);
                         },
                         () => {
                         handleLocationError(true, infoWindow, map.getCenter());
@@ -346,7 +346,7 @@
         });
     </script>
     <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACc5lUcG3lHSvqroAEOMaVOSUec9sr5fA&libraries=places&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap">
     </script>
 </body>
 </html>
