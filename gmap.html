@@ -61,6 +61,10 @@
             var map = null;
             var radius_circle = null;
             var markers_on_map = [];
+            var i;
+            var radius_km = $('#radius_km').val();
+            var address = $('#address').val();
+
 
             //initialize map on document ready
             $(document).ready(function(){ 
@@ -88,9 +92,10 @@
                     navigationControl: true,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
+                
                 map = new google.maps.Map(document.getElementById("map"), myOptions);
                 google.maps.event.addListener(map, 'click', showCloseLocations);
-                google.maps.event.addListener(map, 'click', showMyLocations);
+                google.maps.event.addListener(map, 'click', showClickedLocations);
 
                 // find my location
                 let infoWindow = new google.maps.InfoWindow();
@@ -111,7 +116,7 @@
                         infoWindow.setContent("<h5>My Location.</h5>");
                         infoWindow.open(map);
                         map.setCenter(pos);
-                        showMyCloseLocations(pos);
+                        google.maps.showMyCloseLocations(pos);
                         },
                         () => {
                         handleLocationError(true, infoWindow, map.getCenter());
@@ -124,8 +129,7 @@
                 });
             });
 
-            function showMyLocations(e) {
-                var i;
+            function showClickedLocations(e) {
                 var my_marker = [];
                 var address_lat_lng = e.latLng;
                 for (i = 0; i < my_marker.length; i++) {
@@ -141,23 +145,7 @@
                 my_marker.push(my_new_marker);
             }
 
-            function showMyCloseLocations(myPosition) {
-                var i;
-                var radius_km = $('#radius_km').val();
-                var address = $('#address').val();
-                
-                 //remove all radius and markers from map before displaying new ones
-                if (radius_circle) {
-                    radius_circle.setMap(null);
-                    radius_circle = null;
-                }
-                for (i = 0; i < markers_on_map.length; i++) {
-                    if (markers_on_map[i]) {
-                        markers_on_map[i].setMap(null);
-                        markers_on_map[i] = null;
-                    }
-                }
-
+            function showMyCloseLocations(myPosition) {                
                 var address_lat_lng = myPosition;
                 console.log(address_lat_lng)
                 radius_circle = new google.maps.Circle({
@@ -167,13 +155,51 @@
                     map: map
                 });
                 if(radius_circle) map.fitBounds(radius_circle.getBounds());
+
+                $.getJSON(`Data/english.json`, function (data) {
+                    $.each(data, function (key, value) {
+                        let infoWindow = new google.maps.InfoWindow();
+                        var latitude = parseFloat(value.Latitude)
+                        var longitude = parseFloat(value.Longitude)
+                        var coords = {lat:latitude,lng:longitude}
+                        var name = value.Name
+                        var address = value.Address
+                        var phone = value.Phone
+                        var whatsApp = value.WhatsApp
+                        var viber = value.Viber
+                        var info = `<h4>${name}</h4>` 
+                        + `<h6>${address}</h6>` 
+                        + `<h6>Phone : ${phone}</h6>`
+                        + `<h6>WhatsApp : ${whatsApp}</h6>` 
+                        + `<h6>Viber : ${viber}</h6>`
+                        var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
+                        var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
+                        if (distance_from_location <= radius_km * 1000) {
+                            var new_marker = new google.maps.Marker({
+                                position: marker_lat_lng,
+                                map: map,
+                                title: name,
+                                icon:'/images/cross.png'
+                            });
+                            google.maps.event.addListener(new_marker, 'click', function () {
+                                const posi = {
+                                    lat: latitude,
+                                    lng: longitude,
+                                };
+                                distance_from_location = distance_from_location/1000
+                                infoWindow.setPosition(posi);
+                                infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location.toFixed(2)}  Km </h5>`);
+                                infoWindow.open(map);
+                                map.setCenter(posi);
+                            });
+                            markers_on_map.push(new_marker);
+                        }
+                    })(all_locations[j]);
+                });
+            
             }
             
             function showCloseLocations(e) {
-                var i;
-                var radius_km = $('#radius_km').val();
-                var address = $('#address').val();
-
                 //remove all radius and markers from map before displaying new ones
                 if (radius_circle) {
                     radius_circle.setMap(null);
@@ -258,7 +284,6 @@
                     });
                 }
             }   
-            
 
             //start here search function
             //but search function (google Place API) is not working without add a payment methods
@@ -321,7 +346,7 @@
         });
     </script>
     <script async
-    src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACc5lUcG3lHSvqroAEOMaVOSUec9sr5fA&libraries=places&callback=initMap">
     </script>
 </body>
 </html>
