@@ -179,12 +179,15 @@
                         var address = value.Address
                         var phone = value.Phone
                         var whatsApp = value.WhatsApp
+                        var whatsAppWithoutPlus = whatsApp.replace(/[^0-9]/g,'')
                         var viber = value.Viber
+                        var viberWithoutPlus = viber.replace(/[^0-9]/g,'')
                         var info = `<h4>${name}</h4>` 
                         + `<h6>${address}</h6>` 
                         + `<h6>Phone : ${phone}</h6>`
-                        + `<h6>WhatsApp : ${whatsApp}</h6>` 
-                        + `<h6>Viber : ${viber}</h6>`
+                        + `<a href="https://api.whatsapp.com/send?phone=${whatsAppWithoutPlus}">WhatsApp : ${whatsApp}</a>`
+                        + `<br/>`
+                        + `<a href="viber://contact?number=%2B${viberWithoutPlus}">Viber : ${viber}</a>`
                         var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
                         var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
                         if (distance_from_location <= radius_km * 1000) {
