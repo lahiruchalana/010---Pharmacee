@@ -54,7 +54,6 @@
             </div> 
         </nav>
     </div>
-
     <div id="map" style="z-index: 0;"></div>
     <script>
         function initMap() {
@@ -62,10 +61,7 @@
             var radius_circle = null;
             var markers_on_map = [];
             var i;
-            var radius_km = $('#radius_km').val();
-            var address = $('#address').val();
-
-
+            var address_lat_lng = null;
             //initialize map on document ready
             $(document).ready(function(){ 
                 // show your current location
@@ -80,6 +76,7 @@
                         infoWindow.open(map);
                         map.setCenter(pos);
                         showMyCloseLocations(pos);
+                        getLanguageByData(pos)
                         },
                         () => {
                         handleLocationError(true, infoWindow, map.getCenter());
@@ -92,11 +89,9 @@
                     navigationControl: true,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                
                 map = new google.maps.Map(document.getElementById("map"), myOptions);
                 google.maps.event.addListener(map, 'click', showCloseLocations);
                 google.maps.event.addListener(map, 'click', showClickedLocations);
-
                 // find my location
                 let infoWindow = new google.maps.InfoWindow();
                 const locationButton = document.getElementById("myLocationButton");
@@ -128,7 +123,96 @@
                     }
                 });
             });
-
+            function showCloseLocations(e) {
+                var radius_km = $('#radius_km').val();
+                removeAllRadiusAndMarkers()                
+                address_lat_lng = e.latLng;
+                console.log(radius_km)
+                radius_circle = new google.maps.Circle({
+                    center: address_lat_lng,
+                    radius: radius_km * 1000,
+                    clickable: false,
+                    map: map
+                });
+                if(radius_circle) map.fitBounds(radius_circle.getBounds());
+                getLanguageByData(address_lat_lng)
+            }   
+            function showMyCloseLocations(myPosition) { 
+                var radius_km = $('#radius_km').val();
+                removeAllRadiusAndMarkers()              
+                address_lat_lng = myPosition;
+                console.log(radius_km)
+                radius_circle = new google.maps.Circle({
+                    center: address_lat_lng,
+                    radius: radius_km * 1000,
+                    clickable: false,
+                    map: map
+                });
+                if(radius_circle) map.fitBounds(radius_circle.getBounds());
+                var address_lat_lng_new = new google.maps.LatLng(address_lat_lng.lat, address_lat_lng.lng);
+                getLanguageByData(address_lat_lng_new)
+            }
+            function removeAllRadiusAndMarkers() {
+                //remove all radius and markers from map before displaying new ones
+                if (radius_circle) {
+                    radius_circle.setMap(null);
+                    radius_circle = null;
+                }
+                for (i = 0; i < markers_on_map.length; i++) {
+                    if (markers_on_map[i]) {
+                        markers_on_map[i].setMap(null);
+                        markers_on_map[i] = null;
+                    }
+                }
+            }
+            // Default table --> English Table
+            // function to get lat lons with info with english, sinhala and tamil language
+            function getLanguageByData(address_lat_lng) {
+                $.getJSON(`../Data/english.json`, function (data) {
+                    $.each(data, function (key, value) {
+                        var radius_km = $('#radius_km').val();
+                        let infoWindow = new google.maps.InfoWindow();
+                        var latitude = parseFloat(value.Latitude)
+                        var longitude = parseFloat(value.Longitude)
+                        var coords = {lat:latitude,lng:longitude}
+                        var name = value.Name
+                        var address = value.Address
+                        var phone = value.Phone
+                        var whatsApp = value.WhatsApp
+                        var whatsAppWithoutPlus = whatsApp.replace(/[^0-9]/g,'')
+                        var viber = value.Viber
+                        var viberWithoutPlus = viber.replace(/[^0-9]/g,'')
+                        var info = `<h4>${name}</h4>` 
+                        + `<h6>${address}</h6>` 
+                        + `<h6>Phone : ${phone}</h6>`
+                        + `<a href="https://api.whatsapp.com/send?phone=${whatsAppWithoutPlus}">WhatsApp : ${whatsApp}</a>`
+                        + `<br/>`
+                        + `<a href="viber://contact?number=%2B${viberWithoutPlus}">Viber : ${viber}</a>`
+                        var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
+                        var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
+                        if (distance_from_location <= radius_km * 1000) {
+                            var new_marker = new google.maps.Marker({
+                                position: marker_lat_lng,
+                                map: map,
+                                title: name,
+                                icon:'/images/cross.png'
+                            });
+                            google.maps.event.addListener(new_marker, 'click', function () {
+                                const pos = {
+                                    lat: latitude,
+                                    lng: longitude,
+                                };
+                                distance_from_location = distance_from_location/1000
+                                infoWindow.setPosition(pos);
+                                infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location.toFixed(2)}  Km </h5>`);
+                                infoWindow.open(map);
+                                map.setCenter(pos);
+                            });
+                            markers_on_map.push(new_marker);
+                        }
+                    });
+                });
+            }
             function showClickedLocations(e) {
                 var my_marker = [];
                 var address_lat_lng = e.latLng;
@@ -144,193 +228,7 @@
                 });
                 my_marker.push(my_new_marker);
             }
-
-            function showMyCloseLocations(myPosition) {                
-                var address_lat_lng = myPosition;
-                console.log(address_lat_lng)
-                radius_circle = new google.maps.Circle({
-                    center: address_lat_lng,
-                    radius: radius_km * 1000,
-                    clickable: false,
-                    map: map
-                });
-                if(radius_circle) map.fitBounds(radius_circle.getBounds());
-
-                $.getJSON(`Data/english.json`, function (data) {
-                    $.each(data, function (key, value) {
-                        let infoWindow = new google.maps.InfoWindow();
-                        var latitude = parseFloat(value.Latitude)
-                        var longitude = parseFloat(value.Longitude)
-                        var coords = {lat:latitude,lng:longitude}
-                        var name = value.Name
-                        var address = value.Address
-                        var phone = value.Phone
-                        var whatsApp = value.WhatsApp
-                        var viber = value.Viber
-                        var info = `<h4>${name}</h4>` 
-                        + `<h6>${address}</h6>` 
-                        + `<h6>Phone : ${phone}</h6>`
-                        + `<h6>WhatsApp : ${whatsApp}</h6>` 
-                        + `<h6>Viber : ${viber}</h6>`
-                        var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
-                        var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
-                        if (distance_from_location <= radius_km * 1000) {
-                            var new_marker = new google.maps.Marker({
-                                position: marker_lat_lng,
-                                map: map,
-                                title: name,
-                                icon:'/images/cross.png'
-                            });
-                            google.maps.event.addListener(new_marker, 'click', function () {
-                                const posi = {
-                                    lat: latitude,
-                                    lng: longitude,
-                                };
-                                distance_from_location = distance_from_location/1000
-                                infoWindow.setPosition(posi);
-                                infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location.toFixed(2)}  Km </h5>`);
-                                infoWindow.open(map);
-                                map.setCenter(posi);
-                            });
-                            markers_on_map.push(new_marker);
-                        }
-                    })(all_locations[j]);
-                });
-            
-            }
-            
-            function showCloseLocations(e) {
-                //remove all radius and markers from map before displaying new ones
-                if (radius_circle) {
-                    radius_circle.setMap(null);
-                    radius_circle = null;
-                }
-                for (i = 0; i < markers_on_map.length; i++) {
-                    if (markers_on_map[i]) {
-                        markers_on_map[i].setMap(null);
-                        markers_on_map[i] = null;
-                    }
-                }
-                
-                var address_lat_lng = e.latLng;
-                radius_circle = new google.maps.Circle({
-                    center: address_lat_lng,
-                    radius: radius_km * 1000,
-                    clickable: false,
-                    map: map
-                });
-                if(radius_circle) map.fitBounds(radius_circle.getBounds());
-                // Default table --> English Table
-                getLanguageByData("english")
-
-                // Click on Sinhala language button
-                $('#Sinhala').click(function(){
-                    let language = "sinhala"
-                    getLanguageByData(language)
-                });
-
-                // Click on English language button
-                $('#English').click(function(){
-                    let language = "english"
-                    getLanguageByData(language)
-                });
-
-                // Click on Tamil language button
-                $('#Tamil').click(function(){
-                    let language = "tamil"
-                    getLanguageByData(language)
-                });
-                // function to get lat lons with info with english, sinhala and tamil language
-                function getLanguageByData(language) {
-                    $.getJSON(`Data/${language}.json`, function (data) {
-                        $.each(data, function (key, value) {
-                            let infoWindow = new google.maps.InfoWindow();
-                            var latitude = parseFloat(value.Latitude)
-                            var longitude = parseFloat(value.Longitude)
-                            var coords = {lat:latitude,lng:longitude}
-                            var name = value.Name
-                            var address = value.Address
-                            var phone = value.Phone
-                            var whatsApp = value.WhatsApp
-                            var viber = value.Viber
-                            var info = `<h4>${name}</h4>` 
-                            + `<h6>${address}</h6>` 
-                            + `<h6>Phone : ${phone}</h6>`
-                            + `<h6>WhatsApp : ${whatsApp}</h6>` 
-                            + `<h6>Viber : ${viber}</h6>`
-                            var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
-                            var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
-                            if (distance_from_location <= radius_km * 1000) {
-                                var new_marker = new google.maps.Marker({
-                                    position: marker_lat_lng,
-                                    map: map,
-                                    title: name,
-                                    icon:'/images/cross.png'
-                                });
-                                google.maps.event.addListener(new_marker, 'click', function () {
-                                    const pos = {
-                                        lat: latitude,
-                                        lng: longitude,
-                                    };
-                                    distance_from_location = distance_from_location/1000
-                                    infoWindow.setPosition(pos);
-                                    infoWindow.setContent(`${info}  <h5> Distance From Selected Point: ${distance_from_location.toFixed(2)}  Km </h5>`);
-                                    infoWindow.open(map);
-                                    map.setCenter(pos);
-                                });
-                                markers_on_map.push(new_marker);
-                            }
-                        })(all_locations[j]);
-                    });
-                }
-            }   
-
-            //start here search function
-            //but search function (google Place API) is not working without add a payment methods
-            const input = document.getElementById("pac-input");
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            autocomplete.bindTo('bounds', map);
-            autocomplete.addListener('place_changed', function() {
-            infowindow.close();
-            // markers are not visible when function calling
-            marker.setVisible(false);
-            var place = autocomplete.getPlace();
-            if (!place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
-                return;
-            }
-            // If the place has a geometry, then present it on a map.
-            if (place.geometry.viewport) {
-                map.fitBounds(place.geometry.viewport);
-            } else {
-                map.setCenter(place.geometry.location);
-                map.setZoom(17);
-            }
-            marker.setIcon(({
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(35, 35)
-            }));
-            marker.setPosition(place.geometry.location);
-            marker.setVisible(true);
-            var address = '';
-            if (place.address_components) {
-                address = [
-                    (place.address_components[0] && place.address_components[0].short_name || ''),
-                    (place.address_components[1] && place.address_components[1].short_name || ''),
-                    (place.address_components[2] && place.address_components[2].short_name || '')
-                ].join(' ');
-            }
-            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-            infowindow.open(map, marker);
-            
-            });
         }
-        /////////// end of search function /////////////////
-
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(
@@ -340,7 +238,6 @@
         );
         infoWindow.open(map);
         }
-
         $('#dropdownForLanguage').click(function(){
         $('#languageDropdown').toggleClass('show');
         });
