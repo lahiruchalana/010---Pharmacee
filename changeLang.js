@@ -1,4 +1,4 @@
-function changeDistrictLanguage(language) {
+window.changeDistrictLanguage = function changeDistrictLanguage(language) {
     if (language.includes("sinhala") ) {
         // change button names when select sinhala language
         document.getElementById('provinceSelector').textContent   = 'පලාත තෝරන්න';
