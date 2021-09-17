@@ -152,9 +152,9 @@ function initMap() {
                 + `<h6>${address}</h6>` 
                 + `<a href="tel:+${phone}">Phone : ${phone}</a>`
                 + `<br/>`
-                + `<a href="https://api.whatsapp.com/send?phone=${whatsAppWithoutPlus}">WhatsApp : ${whatsApp}</a>`
+                + `<a href="https://api.whatsapp.com/send?phone=${whatsAppWithoutPlus}">WhatsApp :<img src="../images/whatsapp.png"></img> ${whatsApp}</a>`
                 + `<br/>`
-                + `<a href="viber://contact?number=%2B${viberWithoutPlus}">Viber : ${viber}</a>`
+                + `<a href="viber://contact?number=%2B${viberWithoutPlus}">Viber :<img src="../images/viber.png"></img> ${viber}</a>`
                 var marker_lat_lng = new google.maps.LatLng(latitude, longitude);
                 var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
                 if (distance_from_location <= radius_km * 1000) {
