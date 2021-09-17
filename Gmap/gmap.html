@@ -37,7 +37,10 @@
                     <option value=1>1km</option>
                     <option value=2>2km</option>
                     <option value=5>5km</option>
+                    <option value=10>10km</option>
+                    <option value=20>20km</option>
                     <option value=30>30km</option>
+                    <option value=50>50km</option>
                 </select>
                 <button type="button" class="btn btn-primary" style="width: 150px; margin-right: 10px;" onClick="location.href='../index.html'">Home</button>
                 <div id="dropdownForLanguage" class="dropdown" >
@@ -125,32 +128,46 @@
             });
             function showCloseLocations(e) {
                 var radius_km = $('#radius_km').val();
-                removeAllRadiusAndMarkers()                
-                address_lat_lng = e.latLng;
-                console.log(radius_km)
-                radius_circle = new google.maps.Circle({
-                    center: address_lat_lng,
-                    radius: radius_km * 1000,
-                    clickable: false,
-                    map: map
+                showLocationCircle(radius_km);
+                $('#radius_km').click(function(){
+                    radius_km = $('#radius_km').val();
+                    showLocationCircle(radius_km);
                 });
-                if(radius_circle) map.fitBounds(radius_circle.getBounds());
-                getLanguageByData(address_lat_lng)
+                function showLocationCircle(radius_km) {
+                    removeAllRadiusAndMarkers()                
+                    address_lat_lng = e.latLng;
+                    console.log(radius_km)
+                    radius_circle = new google.maps.Circle({
+                        center: address_lat_lng,
+                        radius: radius_km * 1000,
+                        clickable: false,
+                        map: map
+                    });
+                    if(radius_circle) map.fitBounds(radius_circle.getBounds());
+                    getLanguageByData(address_lat_lng)
+                }
             }   
             function showMyCloseLocations(myPosition) { 
-                var radius_km = $('#radius_km').val();
-                removeAllRadiusAndMarkers()              
-                address_lat_lng = myPosition;
-                console.log(radius_km)
-                radius_circle = new google.maps.Circle({
-                    center: address_lat_lng,
-                    radius: radius_km * 1000,
-                    clickable: false,
-                    map: map
+                var radius_km = "1";
+                showMyLocationCircle(radius_km);
+                $('#radius_km').click(function(){
+                    radius_km = $('#radius_km').val();
+                    showMyLocationCircle(radius_km);
                 });
-                if(radius_circle) map.fitBounds(radius_circle.getBounds());
-                var address_lat_lng_new = new google.maps.LatLng(address_lat_lng.lat, address_lat_lng.lng);
-                getLanguageByData(address_lat_lng_new)
+                function showMyLocationCircle(radius_km) {
+                    removeAllRadiusAndMarkers()              
+                    address_lat_lng = myPosition;
+                    console.log(radius_km)
+                    radius_circle = new google.maps.Circle({
+                        center: address_lat_lng,
+                        radius: radius_km * 1000,
+                        clickable: false,
+                        map: map
+                    });
+                    if(radius_circle) map.fitBounds(radius_circle.getBounds());
+                    var address_lat_lng_new = new google.maps.LatLng(address_lat_lng.lat, address_lat_lng.lng);
+                    getLanguageByData(address_lat_lng_new)
+                }
             }
             function removeAllRadiusAndMarkers() {
                 //remove all radius and markers from map before displaying new ones
@@ -184,7 +201,8 @@
                         var viberWithoutPlus = viber.replace(/[^0-9]/g,'')
                         var info = `<h4>${name}</h4>` 
                         + `<h6>${address}</h6>` 
-                        + `<h6>Phone : ${phone}</h6>`
+                        + `<a href="tel:+${phone}">Phone : ${phone}</a>`
+                        + `<br/>`
                         + `<a href="https://api.whatsapp.com/send?phone=${whatsAppWithoutPlus}">WhatsApp : ${whatsApp}</a>`
                         + `<br/>`
                         + `<a href="viber://contact?number=%2B${viberWithoutPlus}">Viber : ${viber}</a>`
