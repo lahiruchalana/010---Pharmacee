@@ -80,7 +80,12 @@ function initMap() {
                 center: address_lat_lng,
                 radius: radius_km * 1000,
                 clickable: false,
-                map: map
+                map: map,
+                strokeColor: "rgb(0, 117, 252)",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "rgb(0, 117, 252)",
+                fillOpacity: 0.20,
             });
             if(radius_circle) map.fitBounds(radius_circle.getBounds());
             getLanguageByData(address_lat_lng)
@@ -101,7 +106,12 @@ function initMap() {
                 center: address_lat_lng,
                 radius: my_radius_km * 1000,
                 clickable: false,
-                map: map
+                map: map,
+                strokeColor: "rgb(0, 117, 252)",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "rgb(0, 117, 252)",
+                fillOpacity: 0.20,
             });
             if(radius_circle) map.fitBounds(radius_circle.getBounds());
             var address_lat_lng_new = new google.maps.LatLng(address_lat_lng.lat, address_lat_lng.lng);
