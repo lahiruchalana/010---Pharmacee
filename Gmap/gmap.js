@@ -68,18 +68,18 @@ function initMap() {
     function showCloseLocations(e) {
         var radius_km = $('#radius_km').val();
         showLocationCircle(radius_km);
-        $('#radius_km').click(function(){
-            radius_km = $('#radius_km').val();
-            showLocationCircle(radius_km);
+        // $('#radius_km').click(function(){
+        //     radius_km = $('#radius_km').val();
+        //     showLocationCircle(radius_km);
             
-            removePreviousMarkers();
+        //     removePreviousMarkers();
 
-            // $('#radius_km').multiSelect('deselect_all');
-            // $("#radius_km").find('option:selected').removeAttr("selected");
+        //     // $('#radius_km').multiSelect('deselect_all');
+        //     // $("#radius_km").find('option:selected').removeAttr("selected");
 
-            // $("#radius_km").find('option:selected').prop('selected',false);
-            // $("#radius_km").trigger('chosen:updated');
-        });
+        //     // $("#radius_km").find('option:selected').prop('selected',false);
+        //     // $("#radius_km").trigger('chosen:updated');
+        // });
         function showLocationCircle(radius_km) {
             removeAllRadiusAndMarkers()                
             address_lat_lng = e.latLng;
@@ -103,25 +103,25 @@ function initMap() {
     function showMyCloseLocations(myPosition) { 
         var my_radius_km = "1";
         showMyLocationCircle(my_radius_km);
-        $('#radius_km').click(function(){
-            my_radius_km = $('#radius_km').val();
-            console.log(my_radius_km)
-            showMyLocationCircle(my_radius_km);
+        // $('#radius_km').click(function(){
+        //     my_radius_km = $('#radius_km').val();
+        //     console.log(my_radius_km)
+        //     showMyLocationCircle(my_radius_km);
 
-            removePreviousMarkers();
+        //     removePreviousMarkers();
 
-            // $('#radius_km').multiSelect('deselect_all');
+        //     // $('#radius_km').multiSelect('deselect_all');
 
-            // $('#radius_km').multiselect('refresh')
+        //     // $('#radius_km').multiselect('refresh')
 
-            // $('#radius_km').multiselect('deselectAll', false);
+        //     // $('#radius_km').multiselect('deselectAll', false);
 
 
-            // $("#radius_km").find('option:selected').removeAttr("selected");
+        //     // $("#radius_km").find('option:selected').removeAttr("selected");
 
-            // $("#radius_km").find('option:selected').prop('selected',false);
-            // $("#radius_km").trigger('chosen:updated');
-        });
+        //     // $("#radius_km").find('option:selected').prop('selected',false);
+        //     // $("#radius_km").trigger('chosen:updated');
+        // });
         function showMyLocationCircle(my_radius_km) {
             removeAllRadiusAndMarkers()              
             address_lat_lng = myPosition;
