@@ -71,6 +71,14 @@ function initMap() {
         $('#radius_km').click(function(){
             radius_km = $('#radius_km').val();
             showLocationCircle(radius_km);
+            
+            removePreviousMarkers();
+
+            // $('#radius_km').multiSelect('deselect_all');
+            // $("#radius_km").find('option:selected').removeAttr("selected");
+
+            // $("#radius_km").find('option:selected').prop('selected',false);
+            // $("#radius_km").trigger('chosen:updated');
         });
         function showLocationCircle(radius_km) {
             removeAllRadiusAndMarkers()                
@@ -88,6 +96,7 @@ function initMap() {
                 fillOpacity: 0.20,
             });
             if(radius_circle) map.fitBounds(radius_circle.getBounds());
+            ///// issue comes here -- previous data has been stored
             getLanguageByData(address_lat_lng)
         }
     }   
@@ -96,12 +105,26 @@ function initMap() {
         showMyLocationCircle(my_radius_km);
         $('#radius_km').click(function(){
             my_radius_km = $('#radius_km').val();
+            console.log(my_radius_km)
             showMyLocationCircle(my_radius_km);
+
+            removePreviousMarkers();
+
+            // $('#radius_km').multiSelect('deselect_all');
+
+            // $('#radius_km').multiselect('refresh')
+
+            // $('#radius_km').multiselect('deselectAll', false);
+
+
+            // $("#radius_km").find('option:selected').removeAttr("selected");
+
+            // $("#radius_km").find('option:selected').prop('selected',false);
+            // $("#radius_km").trigger('chosen:updated');
         });
         function showMyLocationCircle(my_radius_km) {
             removeAllRadiusAndMarkers()              
             address_lat_lng = myPosition;
-            console.log(my_radius_km)
             radius_circle = new google.maps.Circle({
                 center: address_lat_lng,
                 radius: my_radius_km * 1000,
@@ -117,6 +140,9 @@ function initMap() {
             var address_lat_lng_new = new google.maps.LatLng(address_lat_lng.lat, address_lat_lng.lng);
             getLanguageByData(address_lat_lng_new)
         }
+    }
+    function removePreviousMarkers() {
+        $('#radius_km').multiSelect('deselect_all');
     }
     function removeAllRadiusAndMarkers() {
         //remove all radius and markers from map before displaying new ones
@@ -206,6 +232,10 @@ infoWindow.setContent(
 infoWindow.open(map);
 }
 $('#dropdownForLanguage').click(function(){
-$('#languageDropdown').toggleClass('show');
+    $('#languageDropdown').toggleClass('show');
 });
+$('#dropdownForRadiusKm').click(function(){
+    $('#radius_km_new').toggleClass('show');
+});
+    
 

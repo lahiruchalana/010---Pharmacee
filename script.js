@@ -5,36 +5,15 @@ getData("english")
 getDistrictResults("english")
 getProvinceResults("english")
 
-// Click on Sinhala language button
-$('#Sinhala').click(function(){
-    let language = "sinhala"
+$('#languageDropdown a').click(function(event) {
+    var language = this.textContent;
     console.log(language)
     $('#table tbody').html('');
     getData(language)
     getDistrictResults(language)
     getProvinceResults(language)
     changeDistrictLanguage(language)
-});
-
-// Click on English language button
-$('#English').click(function(){
-    let language = "english"
-    $('#table tbody').html('');
-    getData(language)
-    getDistrictResults(language)
-    getProvinceResults(language)
-    changeDistrictLanguage(language)
-});
-
-// Click on Tamil language button
-$('#Tamil').click(function(){
-    let language = "tamil"
-    $('#table tbody').html('');
-    getData(language)
-    getDistrictResults(language)
-    getProvinceResults(language)
-    changeDistrictLanguage(language)
-});
+})
 
 // English/SInhala/Tamil Tables display function
 function getData(language) {
