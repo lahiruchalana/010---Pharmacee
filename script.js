@@ -5,6 +5,7 @@ getData("english")
 getDistrictResults("english")
 getProvinceResults("english")
 
+// Default table --> Sinhala, Tamil Table
 $('#languageDropdown a').click(function(event) {
     var language = this.textContent;
     console.log(language)
@@ -15,7 +16,7 @@ $('#languageDropdown a').click(function(event) {
     changeDistrictLanguage(language)
 })
 
-// English/SInhala/Tamil Tables display function
+// English/Sinhala/Tamil Tables display function
 function getData(language) {
     $.getJSON(`Data/${language}.json`, function (data) {
         var pharmacy = [];
@@ -49,7 +50,7 @@ function getData(language) {
     });
 }
 
-// this function to filter dictrict by SInhala and Tamil languages
+// filter dictrict by English, Sinhala and Tamil languages
 function getDistrictResults(language) {
     $('#districtButtons button').click(function(event) {
         var districtVal = this.textContent
@@ -63,6 +64,7 @@ function getDistrictResults(language) {
     });
 }
 
+// filter province by English, Sinhala and Tamil languages
 function getProvinceResults(language) {
     $('#provinceDropdown li a').click(function(event) {
         var provinceVal = this.textContent
@@ -158,7 +160,7 @@ function filteredTableByDisctrict(districtVal, districtValSecond, districtValThi
     }
 }
 
-// English language search function
+// search function -- only English
 function filteredTable() {
     var results = [];
     var District = "District";
@@ -196,6 +198,7 @@ function filteredTable() {
     }
 }
 
+// change district buttons and province dropdown by sinhala, tamil and english language
 function changeDistrictLanguage(language) {
     if (language.includes("sinhala") ) {
         // change button names when select sinhala language
