@@ -2,6 +2,7 @@ function initMap() {
     var map = null;
     var radius_circle = null;
     var markers_on_map = [];
+    var my_marker = [];
     var i;
     var address_lat_lng = null;
 
@@ -197,20 +198,20 @@ function initMap() {
 
     // show mark when click on map
     function showClickedLocations(e) {
-        var my_marker = [];
         var address_lat_lng = e.latLng;
-        for (i = 0; i < my_marker.length; i++) {
-            if (my_marker[i]) {
-                my_marker[i].setMapOnAll(null);
-            }
+        for (var i = 0; i < my_marker.length; i++) {
+            my_marker[i].setMap(null);
         }
+        my_marker = [];
         var my_new_marker = new google.maps.Marker({
             position: address_lat_lng,
             map: map,
             title: name,
+            icon:'/images/location.png'
         });
         my_marker.push(my_new_marker);
     }
+
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
